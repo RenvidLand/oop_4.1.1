@@ -71,6 +71,7 @@ public:
 class App : public Tree {
 private:
 	list<Tree> obj;
+	int coutOfObj = 1;
 public:
 	App(App* app) {
 		this->setNewHead(app);
@@ -113,19 +114,21 @@ public:
 
 	void output(list<Tree*> treeO) {
 		for (list<Tree*>::iterator treeObj = treeO.begin(); treeObj != treeO.end(); treeObj++) {
+			if (coutOfObj <= obj.size()) cout << "\n";
 			cout << "The object " << (*treeObj)->getName();
-			if ((*treeObj)->getStatus() > 0) cout << " is ready\n";
-			else if ((*treeObj)->getStatus() == 0) cout << " is disabled\n";
-			else cout << " is not ready\n";
+			if ((*treeObj)->getStatus() > 0) cout << " is ready";
+			else if ((*treeObj)->getStatus() == 0) cout << " is disabled";
+			else cout << " is not ready";
+			coutOfObj++;
 			output((*treeObj)->ptr);
 		}
 	}
 
 	int exec_app() {
 		cout << "The object " << this->getName();
-		if (this->getStatus() > 0) cout << " is ready\n";
-		else if (this->getStatus() == 0) cout << " is disabled\n";
-		else cout << " is not ready\n";
+		if (this->getStatus() > 0) cout << " is ready";
+		else if (this->getStatus() == 0) cout << " is disabled";
+		else cout << " is not ready";
 		output(this->ptr);
 		return 0;
 	}
