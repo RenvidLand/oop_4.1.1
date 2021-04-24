@@ -55,17 +55,17 @@ public:
 
 class Useless_2 : public Tree {
 public:
-	Useless_2(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
+	Useless_2(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName, tempStatus) {}
 };
 
 class Useless_3 : public Tree {
 public:
-	Useless_3(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
+	Useless_3(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName, tempStatus) {}
 };
 
 class Useless_4 : public Tree {
 public:
-	Useless_4(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
+	Useless_4(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName, tempStatus) {}
 };
 
 class App : public Tree {
@@ -109,14 +109,41 @@ public:
 				}
 			}
 		}
+		list<Tree>::iterator treeObj = obj.begin();
+		cout << this->ptr.size();
+	}
+
+	void test1() {
+		for (list<Tree>::iterator treeObj = obj.begin(); treeObj != obj.end(); treeObj++) {
+			cout << " " << treeObj->getName();
+		}
+	}
+
+	void output(list<Tree*> treeO) {
+		//if (!treeObj.empty()) cout << "empty"; return;
+		for (list<Tree*>::iterator treeObj = treeO.begin(); treeObj != treeO.end(); treeObj++) {
+			cout << "The object " << (*treeObj)->getName();
+			if ((*treeObj)->getStatus() > 0) cout << " is ready\n";
+			else if ((*treeObj)->getStatus() == 0) cout << " is disabled\n";
+			else cout << " is not ready\n";
+			output((*treeObj)->ptr);
+			//cout << &treeObj->ptr;
+		}
 	}
 
 	int exec_app() {
-		cout << this->getName() << endl << this->getName();
+		/*cout << this->getName() << endl << this->getName();
 		for (Tree treeObj : obj) {
 			if (treeObj.getHead() == this) cout << "  " << treeObj.getName();
 		}
 		this->output(obj);
+		cout << "\n\n";
+		test1();*/
+		cout << "The object " << this->getName();
+		if (this->getStatus() > 0) cout << " is ready\n";
+		else if (this->getStatus() == 0) cout << " is disabled\n";
+		else cout << " is not ready\n";
+		output(this->ptr);
 		return 0;
 	}
 };
