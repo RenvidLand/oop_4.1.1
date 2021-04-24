@@ -53,16 +53,19 @@ public:
 	}
 };
 
-class Useless_1 : public Tree {
-	Useless_1(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
-};
-
 class Useless_2 : public Tree {
+public:
 	Useless_2(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
 };
 
 class Useless_3 : public Tree {
+public:
 	Useless_3(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
+};
+
+class Useless_4 : public Tree {
+public:
+	Useless_4(Tree* m_head, string m_objName, int tempStatus) : Tree(m_head, m_objName) {}
 };
 
 class App : public Tree {
@@ -84,12 +87,24 @@ public:
 			if (tempName == "endtree") break;
 			cin >> tempName2 >> classNumb >> statusObj;
 			if (tempName == this->getName()) { // Дочерний объект для root
-				obj.push_back(Tree(this, tempName2)); // Создание
+				if (classNumb == 2) {
+					obj.push_back(Useless_2(this, tempName2, statusObj)); // Создание
+				} else if (classNumb == 3) {
+					obj.push_back(Useless_3(this, tempName2, statusObj)); // Создание
+				} else if (classNumb == 4) {
+					obj.push_back(Useless_4(this, tempName2, statusObj)); // Создание
+				}
 				this->ptr.push_back(&obj.back()); // Внесение в список родителя
 			}
 			else for (list<Tree>::iterator treeObj = obj.begin(); treeObj != obj.end(); treeObj++) { // Дочерний объект для указанного объекта
 				if (tempName == treeObj->getName()) { // Поиск имени в качестве родителя
-					obj.push_back(Tree(&*treeObj, tempName2)); // Создание
+					if (classNumb == 2) {
+						obj.push_back(Useless_2(&*treeObj, tempName2, statusObj)); // Создание
+					} else if (classNumb == 3) {
+						obj.push_back(Useless_3(&*treeObj, tempName2, statusObj)); // Создание
+					} else if (classNumb == 4) {
+						obj.push_back(Useless_4(&*treeObj, tempName2, statusObj)); // Создание
+					}
 					treeObj->ptr.push_back(&obj.back()); // Внесение в список родителя
 				}
 			}
