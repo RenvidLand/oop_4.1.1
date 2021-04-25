@@ -36,6 +36,14 @@ public:
 		}
 	}
 
+	void* findByName(list<Tree> treeObj, string name) {
+		for (list<Tree>::iterator treeO = treeObj.begin(); treeO != treeObj.end(); treeO++) {
+			if (treeO->getName() == name) {
+				return treeO->getHead();
+			}
+		}
+	}
+
 	void setNewHead(Tree* obj) { // Метод переопределения головного объекта
 		head = obj;
 	}
@@ -90,9 +98,11 @@ public:
 			if (tempName == this->getName()) { // Дочерний объект для root
 				if (classNumb == 2) {
 					obj.push_back(Useless_2(this, tempName2, statusObj)); // Создание
-				} else if (classNumb == 3) {
+				}
+				else if (classNumb == 3) {
 					obj.push_back(Useless_3(this, tempName2, statusObj)); // Создание
-				} else if (classNumb == 4) {
+				}
+				else if (classNumb == 4) {
 					obj.push_back(Useless_4(this, tempName2, statusObj)); // Создание
 				}
 				this->ptr.push_back(&obj.back()); // Внесение в список родителя
@@ -101,9 +111,11 @@ public:
 				if (tempName == treeObj->getName()) { // Поиск имени в качестве родителя
 					if (classNumb == 2) {
 						obj.push_back(Useless_2(&*treeObj, tempName2, statusObj)); // Создание
-					} else if (classNumb == 3) {
+					}
+					else if (classNumb == 3) {
 						obj.push_back(Useless_3(&*treeObj, tempName2, statusObj)); // Создание
-					} else if (classNumb == 4) {
+					}
+					else if (classNumb == 4) {
 						obj.push_back(Useless_4(&*treeObj, tempName2, statusObj)); // Создание
 					}
 					treeObj->ptr.push_back(&obj.back()); // Внесение в список родителя
@@ -125,11 +137,15 @@ public:
 	}
 
 	int exec_app() {
-		cout << "The object " << this->getName();
+		string tempName = "object_1";
+		this->findByName(obj, tempName);
+
+		/*cout << "The object " << this->getName();
 		if (this->getStatus() > 0) cout << " is ready";
 		else if (this->getStatus() == 0) cout << " is disabled";
 		else cout << " is not ready";
-		output(this->ptr);
+		output(this->ptr);*/
+
 		return 0;
 	}
 };
