@@ -170,7 +170,7 @@ public:
 		for (list<Tree*>::iterator treeO = treeObj.begin(); treeO != treeObj.end(); treeO++) {
 			findLevelOfInherit(*treeO);
 			if (coutOfObj <= obj.size()) cout << "\n";
-			gap.resize((*treeO)->levelOfInherit, '	');
+			gap.resize((*treeO)->levelOfInherit * 4, ' ');
 			cout << gap << (*treeO)->getName();
 			coutOfObj++;
 			output3((*treeO)->ptr);
